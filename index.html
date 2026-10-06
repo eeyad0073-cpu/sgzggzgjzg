@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brmgly - برمجلي | حلول البرمجيات وتطوير المواقع</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --success: #22c55e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Background Effects */
+        .bg-glow {
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0,0,0,0) 70%);
+            top: -100px;
+            right: -100px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .bg-glow-2 {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(0,0,0,0) 70%);
+            bottom: -150px;
+            left: -150px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Header / Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 8%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .contact-btn-nav {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #fff;
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .contact-btn-nav:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem 2rem 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Services Grid */
+        .services-container {
+            max-width: 1200px;
+            margin: 2rem auto 5rem auto;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem 1.8rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(99, 102, 241, 0.2);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem auto;
+            transition: 0.3s ease;
+        }
+
+        .service-card:hover .card-icon {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .service-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .service-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge-offer {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        .badge-coming-soon {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .btn-view {
+            margin-top: auto;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 0.7rem 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .service-card:hover .btn-view {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Detail Pages (Modal View) */
+        .detail-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .detail-page.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .detail-card {
+            background: #1e293b;
+            border: 1px solid var(--border);
+            width: 100%;
+            max-width: 650px;
+            border-radius: 24px;
+            padding: 2.5rem;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .detail-page.active .detail-card {
+            transform: scale(1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s ease;
+            z-index: 10;
+        }
+
+        .close-btn:hover {
+            background: #ef4444;
+        }
+
+        .detail-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-header i {
+            font-size: 2.8rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+
+        .detail-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Price Box styling */
+        .price-box {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px dashed rgba(34, 197, 94, 0.4);
+            border-radius: 16px;
+            padding: 1rem;
+            text-align: center;
+            margin: 1.2rem 0;
+            display: none;
+        }
+
+        .price-box.active {
+            display: block;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-left: 10px;
+        }
+
+        .new-price {
+            color: #4ade80;
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .offer-tag {
+            background: #22c55e;
+            color: #fff;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 6px;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        /* Gallery / Preview Images */
+        .gallery-box {
+            margin: 1.5rem 0;
+            display: none;
+        }
+
+        .gallery-box.active {
+            display: block;
+        }
+
+        .gallery-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            position: relative;
+            background: #0f172a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            text-align: center;
+            transition: 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .gallery-item i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .gallery-item span {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .developer-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .dev-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.2rem;
+        }
+
+        .dev-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .dev-details h4 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .dev-details p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .contact-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .btn-contact {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0.8rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: #fff;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1da851;
+        }
+
+        .btn-phone {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-phone:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 1rem 5%;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .detail-card {
+                padding: 1.5rem;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+    <div class="bg-glow-2"></div>
+
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">
+            <i class="fa-solid fa-code"></i> Brmgly<span>.</span>
+        </a>
+        <a href="tel:01019339230" class="contact-btn-nav">
+            <i class="fa-solid fa-phone"></i> اتصل بنا
+        </a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>حلول برمجية متكاملة للارتقاء بـ <span>أعمالك</span></h1>
+        <p>نقدم لك أفضل الخدمات البرمجية وتطوير المواقع الاحترافية بأعلى جودة وأفضل أداء.</p>
+    </section>
+
+    <!-- Services Section -->
+    <main class="services-container">
+
+        <!-- Service 1: Web Development -->
+        <div class="service-card" onclick="openDetail('web-dev')">
+            <span class="badge-offer">عرض خاص 🔥</span>
+            <div class="card-icon">
+                <i class="fa-solid fa-code"></i>
+            </div>
+            <h3 class="service-title">Web Development</h3>
+            <p class="service-desc">تصميم وتطوير مواقع إلكترونية متكاملة وسريعة ومتجاوبة مع جميع الشاشات بسعر 4000 ج.م بدلاً من 6000 ج.م!</p>
+            <div class="btn-view">
+                عرض العرض والتفاصيل <i class="fa-solid fa-arrow-left"></i>
+            </div>
+        </div>
+
+        <!-- Service 2: CV Website -->
+        <div class="service-card" onclick="openDetail('cv-web')">
+            <span class="badge-offer">عرض خاص 🔥</span>
+            <div class="card-icon">
+                <i class="fa-solid fa-id-card"></i>
+            </div>
+            <h3 class="service-title">CV Website</h3>
+            <p class="service-desc">تصميم سير ذاتية تفاعلية وموقع شخصي محترف يبرز مهاراتك بسعر 500 ج.م بدلاً من 1000 ج.م لفترة محدودة!</p>
+            <div class="btn-view">
+                عرض العرض والأنماط <i class="fa-solid fa-arrow-left"></i>
+            </div>
+        </div>
+
+        <!-- Service 3: Mobile Apps (Coming Soon) -->
+        <div class="service-card" onclick="openDetail('mobile-app')">
+            <span class="badge-coming-soon">Coming Soon</span>
+            <div class="card-icon">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+            </div>
+            <h3 class="service-title">Mobile Apps</h3>
+            <p class="service-desc">تطوير تطبيقات الموبايل لنظامي Android و iOS بأسلوب حديث وسلس. قريباً جداً!</p>
+            <div class="btn-view">
+                عرض التفاصيل <i class="fa-solid fa-arrow-left"></i>
+            </div>
+        </div>
+
+        <!-- Service 4: UI / UX Design (Coming Soon) -->
+        <div class="service-card" onclick="openDetail('ui-ux')">
+            <span class="badge-coming-soon">Coming Soon</span>
+            <div class="card-icon">
+                <i class="fa-solid fa-pen-nib"></i>
+            </div>
+            <h3 class="service-title">UI / UX Design</h3>
+            <p class="service-desc">تصميم واجهات المستخدم وتجارب التصفح المبتكرة والسهلة لزيادة تفاعل المستخدِمين. قريباً!</p>
+            <div class="btn-view">
+                عرض التفاصيل <i class="fa-solid fa-arrow-left"></i>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Detail Modal Page -->
+    <div class="detail-page" id="detailModal">
+        <div class="detail-card">
+            <button class="close-btn" onclick="closeDetail()"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div class="detail-header">
+                <i id="modalIcon" class="fa-solid fa-code"></i>
+                <h2 id="modalTitle">اسم الخدمة</h2>
+                <p id="modalDesc" style="color: var(--text-muted); font-size: 0.95rem;">وصف الخدمة...</p>
+            </div>
+
+            <!-- Box for Special Offer / Pricing -->
+            <div class="price-box" id="modalPriceBox">
+                <span class="offer-tag">عرض خاص 🔥</span>
+                <span class="old-price" id="modalOldPrice">1000 ج.م</span>
+                <span class="new-price" id="modalNewPrice">500 ج.م</span>
+                <p id="modalPriceSubtext" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">احصل على الخدمة بأفضل سعر وأعلى جودة!</p>
+            </div>
+
+            <!-- Gallery Box for Templates Preview -->
+            <div class="gallery-box" id="modalGalleryBox">
+                <div class="gallery-title">
+                    <i class="fa-solid fa-layer-group"></i> مميزات الخدمة والأنماط:
+                </div>
+                <div class="gallery-grid" id="modalGalleryGrid">
+                    <!-- Dynamic Preview Items -->
+                </div>
+            </div>
+
+            <div class="developer-box">
+                <div class="dev-info">
+                    <div class="dev-avatar">E</div>
+                    <div class="dev-details">
+                        <h4>المبرمج: <span id="modalDevName">Eyad Mohamed</span></h4>
+                        <p>تطوير وتصميم المواقع والحلول البرمجية</p>
+                    </div>
+                </div>
+
+                <div class="contact-actions">
+                    <a id="modalPhoneBtn" href="tel:01019339230" class="btn-contact btn-phone">
+                        <i class="fa-solid fa-phone"></i> اتصال: <span id="modalPhoneNum">01019339230</span>
+                    </a>
+                    <a id="modalWhatsappBtn" href="https://wa.me/201019339230" target="_blank" class="btn-contact btn-whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> تواصل وطلب العرض عبر الواتساب
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; 2026 لشركة <strong>Brmgly (برمجلي)</strong></p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const servicesData = {
+            'web-dev': {
+                title: 'Web Development',
+                icon: 'fa-code',
+                desc: 'نقدم خدمة تطوير البرمجيات والمواقع الإلكترونية الاحترافية، بدءاً من المواقع التعريفية وحتى المنصات المعقدة بتصاميم حديثة وسرعة فائقة.',
+                devName: 'Eyad Mohamed',
+                phone: '01019339230',
+                hasOffer: true,
+                oldPrice: '6000 ج.م',
+                newPrice: '4000 ج.م',
+                subtext: 'موقع إلكتروني كامل متجاوب وسريع يخدم نشاطك التجاري بأفضل أداء!',
+                templates: [
+                    { icon: 'fa-gauge-high', name: 'أداء وسرعة عالية' },
+                    { icon: 'fa-shield-halved', name: 'حماية وأمان كامل' },
+                    { icon: 'fa-mobile-screen', name: 'تصميم متجاوب' }
+                ]
+            },
+            'cv-web': {
+                title: 'CV Website',
+                icon: 'fa-id-card',
+                desc: 'تصميم CV احترافي يخلي عملائك يطيروا من الفرحة! احصل على موقع سيرة ذاتية تفاعلي يبرز مهاراتك وخبراتك بأعلى مستوى.',
+                devName: 'Eyad Mohamed',
+                phone: '01019339230',
+                hasOffer: true,
+                oldPrice: '1000 ج.م',
+                newPrice: '500 ج.م',
+                subtext: 'موقع سيرة ذاتية تفاعلي يرفع فرص قبولك وتميزك بين الجميع!',
+                templates: [
+                    { icon: 'fa-wand-magic-sparkles', name: 'تصميم جذّاب وتفاعلي' },
+                    { icon: 'fa-laptop-code', name: 'معاينة مباشرة للـ CV' },
+                    { icon: 'fa-mobile-screen', name: 'متجاوب مع كل الشاشات' }
+                ]
+            },
+            'mobile-app': {
+                title: 'Mobile Apps Development',
+                icon: 'fa-mobile-screen-button',
+                desc: 'هذه الخدمة قيد التطوير حالياً (Coming Soon). يمكنك التواصل مع المبرمج للاستفسار والحجز المسبق.',
+                devName: 'Eyad Mohamed',
+                phone: '01019339230',
+                hasOffer: false,
+                templates: []
+            },
+            'ui-ux': {
+                title: 'UI / UX Design',
+                icon: 'fa-pen-nib',
+                desc: 'خدمة تصميم واجهات وتجربة المستخدم قادمة قريباً (Coming Soon). تواصل معنا لمعرفة تفاصيل المشاريع.',
+                devName: 'Eyad Mohamed',
+                phone: '01019339230',
+                hasOffer: false,
+                templates: []
+            }
+        };
+
+        function openDetail(serviceKey) {
+            const data = servicesData[serviceKey];
+            if (!data) return;
+
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalIcon').className = `fa-solid ${data.icon}`;
+            document.getElementById('modalDesc').innerText = data.desc;
+            document.getElementById('modalDevName').innerText = data.devName;
+            document.getElementById('modalPhoneNum').innerText = data.phone;
+            
+            document.getElementById('modalPhoneBtn').href = `tel:${data.phone}`;
+
+            // Handle Price Box
+            const priceBox = document.getElementById('modalPriceBox');
+            if (data.hasOffer) {
+                priceBox.classList.add('active');
+                document.getElementById('modalOldPrice').innerText = data.oldPrice;
+                document.getElementById('modalNewPrice').innerText = data.newPrice;
+                document.getElementById('modalPriceSubtext').innerText = data.subtext;
+
+                // Set Whatsapp Message with price
+                const msg = `أهلاً إياد، أريد طلب خدمة ${data.title} بسعر العرض ${data.newPrice} بدلاً من ${data.oldPrice}`;
+                document.getElementById('modalWhatsappBtn').href = `https://wa.me/20${data.phone.substring(1)}?text=${encodeURIComponent(msg)}`;
+            } else {
+                priceBox.classList.remove('active');
+                const msg = `أهلاً إياد، أريد الاستفسار عن خدمة ${data.title}`;
+                document.getElementById('modalWhatsappBtn').href = `https://wa.me/20${data.phone.substring(1)}?text=${encodeURIComponent(msg)}`;
+            }
+
+            // Handle Preview Gallery Items
+            const galleryBox = document.getElementById('modalGalleryBox');
+            const galleryGrid = document.getElementById('modalGalleryGrid');
+            galleryGrid.innerHTML = '';
+
+            if (data.templates && data.templates.length > 0) {
+                galleryBox.classList.add('active');
+                data.templates.forEach(item => {
+                    const el = document.createElement('div');
+                    el.className = 'gallery-item';
+                    el.innerHTML = `<i class="fa-solid ${item.icon}"></i><span>${item.name}</span>`;
+                    galleryGrid.appendChild(el);
+                });
+            } else {
+                galleryBox.classList.remove('active');
+            }
+
+            const modal = document.getElementById('detailModal');
+            modal.classList.add('active');
+        }
+
+        function closeDetail() {
+            const modal = document.getElementById('detailModal');
+            modal.classList.remove('active');
+        }
+
+        // Close Modal when clicking outside the card
+        window.onclick = function(event) {
+            const modal = document.getElementById('detailModal');
+            if (event.target === modal) {
+                closeDetail();
+            }
+        };
+    </script>
+</body>
+</html>
